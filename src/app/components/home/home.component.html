@@ -1,0 +1,21 @@
+<section class="app-description">
+  <div>
+    <h1>Page Click Visualizer</h1>
+    <p>Start clicking around the page...</p>
+  </div>
+</section>
+
+<div>
+  <button
+    (click)="clickHandler($event)"
+    mat-stroked-button
+  >Reset State</button>
+</div>
+
+@for (click of clicks$ | async; track $index) {
+  <div
+    [style.left.px]="click.clientX"
+    [style.top.px]="click.clientY"
+    class="click"
+  ></div>
+}
