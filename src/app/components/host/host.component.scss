@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.show-btn, .remove-btn {
+  cursor: pointer;
+}

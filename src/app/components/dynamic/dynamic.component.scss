@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > .dynamic {
+    width: 300px;
+    height: 300px;
+    margin: 100px auto 0;
+    background-color: cadetblue;
+    border-radius: 10px;
+  }
+}
