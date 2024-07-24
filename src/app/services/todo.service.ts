@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, delay, map, Observable, of, takeUntil } from 'rxjs';
-import { Todo } from '../types/todo.interface';
+import { catchError, delay, map, Observable, of } from 'rxjs';
+import { Todo } from '../types';
 import { errorHandler } from '../helpers/error-handler.helper';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class TodoService {
   public errorMessage = signal<string>('');
   public todos = signal<Todo[]>([]);
 
-  public setUserId(userId: number): void {
+  public setMemberId(userId: number): void {
     // Clear the todos from the prior selection
     this.todos.set([]);
 

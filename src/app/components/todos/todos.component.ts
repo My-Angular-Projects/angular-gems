@@ -1,7 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { Todo } from '../../types/todo.interface';
-import { User } from '../../types/user.interface';
-import { TodoService } from '../../services/todo.service';
+import { Component, inject } from '@angular/core';
+import { TodoService, UserService } from '../../services';
 
 @Component({
   selector: 'gm-todos',
@@ -14,14 +12,15 @@ export class TodosComponent {
   public readonly pageTitle = 'Team Members and Tasks';
 
   private readonly todoService = inject(TodoService);
+  private readonly userService = inject(UserService);
 
-  public readonly todosForMember = signal<Todo[]>([]);
-  public readonly members = signal<User[]>([]);
-
+  public readonly todosForMember = this.todoService.todos;
   public readonly errorMessage = this.todoService.errorMessage;
+  public readonly members = this.userService.members;
 
-  public onSelectedMember(memberId: EventTarget | null): void {
-    //
+  public onSelectedMember(element: EventTarget | null): void {
+    const memberId = Number((element as HTMLSelectElement).value);
+    this.todoService.setMemberId(memberId);
   }
 
   public onSelectedTask(taskId: EventTarget | null): void {

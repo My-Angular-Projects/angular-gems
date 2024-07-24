@@ -11,21 +11,19 @@
       </select>
     </div>
 
-    @let todos = todosForMember();
-    @if (todos) {
+    @if (todosForMember()) {
     <div class="row">
       <select class="select" (change)="onSelectedTask($event.target)">
         <option value="" selected>--Select a task--</option>
-        @for(t of todos; track t.id) {
-        <option [value]='t.id'>{{ t.title }}</option>
+        @for(todo of todosForMember(); track todo.id) {
+          <option [value]='todo.id'>{{ todo.title }}</option>
         }
       </select>
     </div>
     }
   </div>
 
-  @let message = errorMessage();
-  @if (message) {
-  <div>Error: {{ message }}</div>
+  @if (errorMessage()) {
+  <div>Error: {{ errorMessage() }}</div>
   }
 </div>
