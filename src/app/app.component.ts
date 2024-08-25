@@ -19,15 +19,16 @@ import { WidgetComponent } from './components/widget/widget.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  public viewContainerRef = @ViewChild('container', { read: ViewContainerRef });
+  public viewContainerRef = viewChild('container', { read: ViewContainerRef });
   #componentRef: ComponentRef<WidgetComponent> | undefined;
 
   public createComponent(): void {
+    this.viewContainerRef()?.clear();
     this.#componentRef =
       this.viewContainerRef()?.createComponent(WidgetComponent);
   }
 
   public destroyComponent(): void {
-    this.#componentRef!.remove();
+    this.viewContainerRef()?.clear();
   }
 }
