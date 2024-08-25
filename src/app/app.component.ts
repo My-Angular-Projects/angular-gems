@@ -1,5 +1,14 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ComponentRef,
+  ViewChild,
+  ViewContainerRef,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { WidgetComponent } from './components/widget/widget.component';
 
 @Component({
   selector: 'gm-root',
@@ -7,8 +16,18 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  //
+  public viewContainerRef = @ViewChild('container', { read: ViewContainerRef });
+  #componentRef: ComponentRef<WidgetComponent> | undefined;
+
+  public createComponent(): void {
+    this.#componentRef =
+      this.viewContainerRef()?.createComponent(WidgetComponent);
+  }
+
+  public destroyComponent(): void {
+    this.#componentRef!.remove();
+  }
 }
