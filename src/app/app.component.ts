@@ -26,6 +26,12 @@ export class AppComponent {
     this.viewContainerRef()?.clear();
     this.#componentRef =
       this.viewContainerRef()?.createComponent(WidgetComponent);
+    this.#componentRef?.setInput('title', 'new title');
+    this.#componentRef?.setInput('description', 'new description');
+
+    this.#componentRef?.instance.closed.subscribe(() =>
+      this.#componentRef?.destroy()
+    );
   }
 
   public destroyComponent(): void {
